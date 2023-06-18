@@ -115,11 +115,6 @@ public class Akhir extends javax.swing.JFrame {
         JcbJumtik.setEditable(true);
         JcbJumtik.setForeground(new java.awt.Color(0, 0, 0));
         JcbJumtik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        JcbJumtik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JcbJumtikActionPerformed(evt);
-            }
-        });
 
         JbOke.setText("Cetak");
         JbOke.addActionListener(new java.awt.event.ActionListener() {
@@ -271,28 +266,22 @@ public class Akhir extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // kembali ke halaman awal ketika tekan button back
     private void JbBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbBackActionPerformed
         Formtiket q = new Formtiket();
         q.setVisible(true);
         
         this.dispose();
     }//GEN-LAST:event_JbBackActionPerformed
-
+    // close jFrame ketika tekan button close
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
-     
+        this.dispose();
     }//GEN-LAST:event_CloseActionPerformed
 
-    private void JcbJumtikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcbJumtikActionPerformed
-        int jumlah = Integer.parseInt(JcbJumtik.getSelectedItem().toString());
-        int harga = Integer.parseInt(TxtHartik.getText());
-        int total = jumlah * harga;
-        
-        
-        
-    }//GEN-LAST:event_JcbJumtikActionPerformed
-
     private void tJenisTiketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tJenisTiketActionPerformed
+        
+        // setting agar textfield harga tiket muncul sesuai combobox yang dipilih
         String jenis = (String) tJenisTiket.getSelectedItem();
         Tiket tkt = new Tiket();
         tkt.setJenis_tiket(jenis);
@@ -300,29 +289,25 @@ public class Akhir extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tJenisTiketActionPerformed
-
-    public String printInfoNama(){
-        String InfoNama = TxtNamleng.getText();
-        return InfoNama;
-    }
-    public int printInfoNIK(){
-        return tk.getNIK();
-    }
     
     private void JbOkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbOkeActionPerformed
         Output out = new Output();
         
-        
+        // mengambil value dari texfield nama dan nik 
         tk.setPembeli(TxtNamleng.getText());
         tk.setNIK(Integer.parseInt(TxtNik.getText()));
         
+        // menyimpan ttl combobox kedalam variabel
+        String tgl = (String) Tanggal.getSelectedItem();
+        String bulan = (String) Bulan.getSelectedItem();
+        String tahun = (String) Tahun.getSelectedItem();
+        
+        // mencetak hasil input nama, nik, dan ttl
         out.labelNama.setText(tk.getNama());
         out.labelNIK.setText(Integer.toString(tk.getNIK()));
-        out.labelTgl.setText((String) Tanggal.getSelectedItem());
-        out.labelBulan.setText((String)Bulan.getSelectedItem());
-        out.labelTahun.setText((String)Tahun.getSelectedItem());
+        out.labelTgl.setText(tgl + " " + bulan + " " + tahun);
         
-        
+        // looping untuk menampilkan item yang ditambahkan ke dalam table
         for (int i = 0; i < jenis_tiket.length; i++){
             String jnsTiket = jenis_tiket[i];
             int hrgTiket = harga_tiket [i];
@@ -336,19 +321,23 @@ public class Akhir extends javax.swing.JFrame {
                 this.dispose();
             }
         }
-           
-    }//GEN-LAST:event_JbOkeActionPerformed
-
-    public int subTotalAkhir(){
+        
+        // membuat looping untuk total harga akhir
         int sum=0;
         for(int x=0;x<total.length;x++){
             sum = sum+total[x];
         }
-        return sum;
-    }
+        
+        // membuat output total akhir ke dalam textfield total
+        out.tSubTotal.setText(Integer.toString(sum));
+           
+    }//GEN-LAST:event_JbOkeActionPerformed
+
 
     private void jbTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTambahActionPerformed
-         if (this.index == jenis_tiket.length -1) {
+         
+        // logike untuk memasukan value textfield dan combobox kedalam array yang telah dibuat
+        if (this.index == jenis_tiket.length -1) {
              return;
          }
          
