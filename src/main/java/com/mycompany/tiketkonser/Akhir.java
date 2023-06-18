@@ -320,7 +320,20 @@ public class Akhir extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tJenisTiketActionPerformed
+    public String tgl(){
+        String tanggl = (String) Tanggal.getSelectedItem();
+        return tanggl;
+    }
     
+    public String bln(){
+        String bulan = (String) Bulan.getSelectedItem();
+        return bulan;
+    }
+    
+    public String tahun (){
+        String tahn = (String) Tahun.getSelectedItem();
+        return tahn;
+    }
   
     private void JbOkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbOkeActionPerformed
         Output out = new Output();
