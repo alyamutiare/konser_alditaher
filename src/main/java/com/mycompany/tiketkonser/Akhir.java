@@ -77,11 +77,6 @@ public class Akhir extends javax.swing.JFrame {
 
         TxtNamleng.setBackground(new java.awt.Color(255, 255, 255));
         TxtNamleng.setForeground(new java.awt.Color(0, 0, 0));
-        TxtNamleng.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtNamlengActionPerformed(evt);
-            }
-        });
 
         TxtNik.setBackground(new java.awt.Color(255, 255, 255));
         TxtNik.setForeground(new java.awt.Color(0, 0, 0));
@@ -93,31 +88,16 @@ public class Akhir extends javax.swing.JFrame {
         Tanggal.setEditable(true);
         Tanggal.setForeground(new java.awt.Color(0, 0, 0));
         Tanggal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        Tanggal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TanggalActionPerformed(evt);
-            }
-        });
 
         Bulan.setBackground(new java.awt.Color(255, 255, 255));
         Bulan.setEditable(true);
         Bulan.setForeground(new java.awt.Color(0, 0, 0));
         Bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
-        Bulan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BulanActionPerformed(evt);
-            }
-        });
 
         Tahun.setBackground(new java.awt.Color(255, 255, 255));
         Tahun.setEditable(true);
         Tahun.setForeground(new java.awt.Color(0, 0, 0));
         Tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", " " }));
-        Tahun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TahunActionPerformed(evt);
-            }
-        });
 
         Jenistiket.setForeground(new java.awt.Color(0, 0, 0));
         Jenistiket.setText("Jenis Tiket");
@@ -334,16 +314,31 @@ public class Akhir extends javax.swing.JFrame {
         String tahn = (String) Tahun.getSelectedItem();
         return tahn;
     }
-  
+    
+    public String printInfoNama(){
+        String InfoNama = TxtNamleng.getText();
+        return InfoNama;
+    }
+    public int printInfoNIK(){
+        return tk.getNIK();
+    }
+    
     private void JbOkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbOkeActionPerformed
         Output out = new Output();
         
+        
+        tk.setPembeli(TxtNamleng.getText());
+        tk.setNIK(Integer.parseInt(TxtNik.getText()));
+        
+        out.labelNama.setText(tk.getNama());
+        out.labelNIK.setText(Integer.toString(tk.getNIK()));
         
         for (int i = 0; i < jenis_tiket.length; i++){
             String jnsTiket = jenis_tiket[i];
             int hrgTiket = harga_tiket [i];
             int jmlhBeli = jumlah_pembelian_tiket[i];
-            int totl = harga_tiket [i]*jumlah_pembelian_tiket[i];
+            int totl = total[i];
+            
             if (jnsTiket != null) {
                 DefaultTableModel model = (DefaultTableModel) out.tableOutput.getModel();
                 model.addRow (new Object[] {jnsTiket, hrgTiket, jmlhBeli, totl});
@@ -351,51 +346,16 @@ public class Akhir extends javax.swing.JFrame {
                 this.dispose();
             }
         }
-        
-        
-        
-        
-//        """
-//        
-//        TransaksiTiket tk = new TransaksiTiket();
-//        tk.setPembeli(TxtNamleng.getText());
-//        tk.setNIK(Integer.parseInt(TxtNik.getText()));
-//        
-//        System.out.println(Tanggal.getSelectedItem());
-//        System.out.println(Bulan.getSelectedItem());
-//        System.out.println(Tahun.getSelectedItem());
-//        
-//        for (int i = 0; i < jenis_tiket.length; i++) {
-//            String jnsTiket = jenis_tiket[i];
-//            int hrgTiket = harga_tiket [i];
-//            int jmlhBliTiket = jumlah_pembelian_tiket [i];
-//            int sbTotal = total [i];
-//            
-//            if (jnsTiket != null){
-//                DefaultTableModel model = (DefaultTableModel) tableOutput.getModel();
-//                model.addRow (new Object[]{jenis_tiket, harga_tiket, jumlah_pembelian_tiket, total});
-//            }
-//        }   
-//        """
            
     }//GEN-LAST:event_JbOkeActionPerformed
 
-
-
-    private void TanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TanggalActionPerformed
-        // TODO add your handling code here:
-        String tgl = (String) Tanggal.getSelectedItem();
-    }//GEN-LAST:event_TanggalActionPerformed
-
-    private void BulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BulanActionPerformed
-        // TODO add your handling code here:
-        String bulan = (String) Bulan.getSelectedItem();
-    }//GEN-LAST:event_BulanActionPerformed
-
-    private void TahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TahunActionPerformed
-        // TODO add your handling code here:
-        String thun = (String) Tahun.getSelectedItem();
-    }//GEN-LAST:event_TahunActionPerformed
+    public int subTotalAkhir(){
+        int sum=0;
+        for(int x=0;x<total.length;x++){
+            sum = sum+total[x];
+        }
+        return sum;
+    }
 
     private void jbTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTambahActionPerformed
          if (this.index == jenis_tiket.length -1) {
@@ -406,6 +366,7 @@ public class Akhir extends javax.swing.JFrame {
          this.jenis_tiket[currentIndex] = (String) tJenisTiket.getSelectedItem();
          this.harga_tiket [currentIndex] = Integer.parseInt(TxtHartik.getText());
          this.jumlah_pembelian_tiket [currentIndex] =Integer.parseInt((String) JcbJumtik.getSelectedItem());
+         this.total [currentIndex] = harga_tiket[currentIndex]*jumlah_pembelian_tiket[currentIndex];
         
          
          
@@ -414,11 +375,6 @@ public class Akhir extends javax.swing.JFrame {
          TxtHartik.setText(Integer.toString(0));
          JcbJumtik.setSelectedIndex(0);
     }//GEN-LAST:event_jbTambahActionPerformed
-
-    private void TxtNamlengActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNamlengActionPerformed
-        // TODO add your handling code here:
-        tk.setPembeli(TxtNamleng.getText());
-    }//GEN-LAST:event_TxtNamlengActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,8 +422,8 @@ public class Akhir extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Tahun;
     private javax.swing.JComboBox<String> Tanggal;
     private javax.swing.JTextField TxtHartik;
-    private javax.swing.JTextField TxtNamleng;
-    private javax.swing.JTextField TxtNik;
+    public javax.swing.JTextField TxtNamleng;
+    public javax.swing.JTextField TxtNik;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

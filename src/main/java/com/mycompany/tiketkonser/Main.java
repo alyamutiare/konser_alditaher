@@ -7,16 +7,8 @@ public class Main {
             beli1.setPembeli("Orang");
             beli1.setNIK(12864037);
             beli1.setBanyakBeli(2);
+            
+            System.out.println(beli1.getNama());
 
-            // beli 1
-            beli1.setJenis_tiket("Festival");
-            beli1.setJumlahBeliTiket(2);
-
-            // beli 2
-            beli1.setJenis_tiket("CAT 1");
-            beli1.setJumlahBeliTiket(2);
-
-            // cetak transaksi
-            beli1.cetak();
     }
 }
