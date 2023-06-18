@@ -65,12 +65,14 @@ public class TransaksiTiket extends Tiket implements InfoPembeli {
     }
 
     @Override
-    public void setPembeli(String name) {
+    public void setPembeli(String Pembeli) {
+        this.Pembeli = Pembeli;
 
     }
 
     @Override
     public void setNIK(int nik) {
+        this.nik = nik;
 
         
     }

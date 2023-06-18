@@ -14,9 +14,11 @@ import javax.swing.table.DefaultTableModel;
 public class Akhir extends javax.swing.JFrame {
     
     String [] jenis_tiket = new String [10];
-    String [] harga_tiket = new String [10];
-    String [] jumlah_pembelian_tiket = new String [20];
-    String [] total = new String [10];
+    int [] harga_tiket = new int [10];
+    int [] jumlah_pembelian_tiket = new int [20];
+    int [] total = new int [10];
+    int index = -1;
+    TransaksiTiket tk = new TransaksiTiket();
 
     /**
      * Creates new form NewJFrame
@@ -34,8 +36,6 @@ public class Akhir extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
-        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -52,42 +52,46 @@ public class Akhir extends javax.swing.JFrame {
         TxtHartik = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         JcbJumtik = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        TxtHartiktot = new javax.swing.JTextField();
         JbOke = new javax.swing.JButton();
         JbBack = new javax.swing.JButton();
         Close = new javax.swing.JButton();
         tJenisTiket = new javax.swing.JComboBox<>();
         jbTambah = new javax.swing.JButton();
 
-        jMenu1.setText("jMenu1");
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("FORM PEMESANAN TIKET");
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("ALDI TAHER MUSIC CONCERT");
 
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nama Lengkap");
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nomer Identitas (KTP/ID Lainnya}");
 
+        TxtNamleng.setBackground(new java.awt.Color(255, 255, 255));
+        TxtNamleng.setForeground(new java.awt.Color(0, 0, 0));
+        TxtNamleng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNamlengActionPerformed(evt);
+            }
+        });
+
+        TxtNik.setBackground(new java.awt.Color(255, 255, 255));
+        TxtNik.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Tanggal Lahir");
 
+        Tanggal.setBackground(new java.awt.Color(255, 255, 255));
+        Tanggal.setEditable(true);
+        Tanggal.setForeground(new java.awt.Color(0, 0, 0));
         Tanggal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         Tanggal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +99,9 @@ public class Akhir extends javax.swing.JFrame {
             }
         });
 
+        Bulan.setBackground(new java.awt.Color(255, 255, 255));
+        Bulan.setEditable(true);
+        Bulan.setForeground(new java.awt.Color(0, 0, 0));
         Bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
         Bulan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +109,9 @@ public class Akhir extends javax.swing.JFrame {
             }
         });
 
+        Tahun.setBackground(new java.awt.Color(255, 255, 255));
+        Tahun.setEditable(true);
+        Tahun.setForeground(new java.awt.Color(0, 0, 0));
         Tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", " " }));
         Tahun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,20 +119,27 @@ public class Akhir extends javax.swing.JFrame {
             }
         });
 
+        Jenistiket.setForeground(new java.awt.Color(0, 0, 0));
         Jenistiket.setText("Jenis Tiket");
 
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Harga Tiket");
 
+        TxtHartik.setBackground(new java.awt.Color(255, 255, 255));
+        TxtHartik.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Jumlah Tiket");
 
-        JcbJumtik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        JcbJumtik.setBackground(new java.awt.Color(255, 255, 255));
+        JcbJumtik.setEditable(true);
+        JcbJumtik.setForeground(new java.awt.Color(0, 0, 0));
+        JcbJumtik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         JcbJumtik.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JcbJumtikActionPerformed(evt);
             }
         });
-
-        jLabel9.setText("Total Harga Tiket");
 
         JbOke.setText("Cetak");
         JbOke.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +162,10 @@ public class Akhir extends javax.swing.JFrame {
             }
         });
 
-        tJenisTiket.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FESTIVAL", "CAT1", "CAT2", "CAT3" }));
+        tJenisTiket.setBackground(new java.awt.Color(255, 255, 255));
+        tJenisTiket.setEditable(true);
+        tJenisTiket.setForeground(new java.awt.Color(0, 0, 0));
+        tJenisTiket.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "FESTIVAL", "CAT1", "CAT2", "CAT3" }));
         tJenisTiket.setToolTipText("");
         tJenisTiket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,44 +195,40 @@ public class Akhir extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(Jenistiket)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(145, 145, 145)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtNik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtNamleng, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tJenisTiket, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JcbJumtik, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtHartik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(Jenistiket)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addGap(145, 145, 145)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtNik, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtNamleng, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tJenisTiket, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(JcbJumtik, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(TxtHartiktot, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TxtHartik, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Bulan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JbOke)
-                                    .addComponent(jbTambah))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JbBack)
-                                    .addComponent(Close))
-                                .addGap(18, 18, 18)))))
-                .addContainerGap(67, Short.MAX_VALUE))
+                                .addComponent(Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Bulan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(92, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JbOke)
+                    .addComponent(jbTambah))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JbBack)
+                    .addComponent(Close))
+                .addGap(109, 109, 109))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel2)
@@ -234,7 +250,7 @@ public class Akhir extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Jenistiket)
                     .addComponent(tJenisTiket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtHartik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -246,10 +262,7 @@ public class Akhir extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(20, 20, 20)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(TxtHartiktot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JbBack)
                     .addComponent(jbTambah))
@@ -257,14 +270,16 @@ public class Akhir extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close)
                     .addComponent(JbOke))
-                .addGap(17, 17, 17))
+                .addGap(57, 57, 57))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,11 +304,12 @@ public class Akhir extends javax.swing.JFrame {
     }//GEN-LAST:event_CloseActionPerformed
 
     private void JcbJumtikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcbJumtikActionPerformed
-        double jumlah = Double.parseDouble(JcbJumtik.getSelectedItem().toString());
-        double harga = Double.parseDouble(TxtHartik.getText());
-        double total = jumlah * harga;
+        int jumlah = Integer.parseInt(JcbJumtik.getSelectedItem().toString());
+        int harga = Integer.parseInt(TxtHartik.getText());
+        int total = jumlah * harga;
         
-        TxtHartiktot.setText("" + total);
+        
+        
     }//GEN-LAST:event_JcbJumtikActionPerformed
 
     private void tJenisTiketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tJenisTiketActionPerformed
@@ -304,17 +320,63 @@ public class Akhir extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tJenisTiketActionPerformed
-
+    public String tgl(){
+        String tanggl = (String) Tanggal.getSelectedItem();
+        return tanggl;
+    }
+    
+    public String bln(){
+        String bulan = (String) Bulan.getSelectedItem();
+        return bulan;
+    }
+    
+    public String tahun (){
+        String tahn = (String) Tahun.getSelectedItem();
+        return tahn;
+    }
+  
     private void JbOkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbOkeActionPerformed
-        TransaksiTiket tk = new TransaksiTiket();
-        tk.setPembeli(TxtNamleng.getText());
-        tk.setNIK(Integer.parseInt(TxtNik.getText()));
+        Output out = new Output();
         
-        System.out.println(Tanggal.getSelectedItem());
-        System.out.println(Bulan.getSelectedItem());
-        System.out.println(Tahun.getSelectedItem());
-        System.out.println(tk);
-        tk.cetak();
+        
+        for (int i = 0; i < jenis_tiket.length; i++){
+            String jnsTiket = jenis_tiket[i];
+            int hrgTiket = harga_tiket [i];
+            int jmlhBeli = jumlah_pembelian_tiket[i];
+            int totl = harga_tiket [i]*jumlah_pembelian_tiket[i];
+            if (jnsTiket != null) {
+                DefaultTableModel model = (DefaultTableModel) out.tableOutput.getModel();
+                model.addRow (new Object[] {jnsTiket, hrgTiket, jmlhBeli, totl});
+                out.setVisible(true);
+                this.dispose();
+            }
+        }
+        
+        
+        
+        
+//        """
+//        
+//        TransaksiTiket tk = new TransaksiTiket();
+//        tk.setPembeli(TxtNamleng.getText());
+//        tk.setNIK(Integer.parseInt(TxtNik.getText()));
+//        
+//        System.out.println(Tanggal.getSelectedItem());
+//        System.out.println(Bulan.getSelectedItem());
+//        System.out.println(Tahun.getSelectedItem());
+//        
+//        for (int i = 0; i < jenis_tiket.length; i++) {
+//            String jnsTiket = jenis_tiket[i];
+//            int hrgTiket = harga_tiket [i];
+//            int jmlhBliTiket = jumlah_pembelian_tiket [i];
+//            int sbTotal = total [i];
+//            
+//            if (jnsTiket != null){
+//                DefaultTableModel model = (DefaultTableModel) tableOutput.getModel();
+//                model.addRow (new Object[]{jenis_tiket, harga_tiket, jumlah_pembelian_tiket, total});
+//            }
+//        }   
+//        """
            
     }//GEN-LAST:event_JbOkeActionPerformed
 
@@ -336,8 +398,27 @@ public class Akhir extends javax.swing.JFrame {
     }//GEN-LAST:event_TahunActionPerformed
 
     private void jbTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTambahActionPerformed
+         if (this.index == jenis_tiket.length -1) {
+             return;
+         }
+         
+         int currentIndex = ++this.index;
+         this.jenis_tiket[currentIndex] = (String) tJenisTiket.getSelectedItem();
+         this.harga_tiket [currentIndex] = Integer.parseInt(TxtHartik.getText());
+         this.jumlah_pembelian_tiket [currentIndex] =Integer.parseInt((String) JcbJumtik.getSelectedItem());
         
+         
+         
+         // setting ulang text field menjadi kosong
+         tJenisTiket.setSelectedIndex(0);
+         TxtHartik.setText(Integer.toString(0));
+         JcbJumtik.setSelectedIndex(0);
     }//GEN-LAST:event_jbTambahActionPerformed
+
+    private void TxtNamlengActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNamlengActionPerformed
+        // TODO add your handling code here:
+        tk.setPembeli(TxtNamleng.getText());
+    }//GEN-LAST:event_TxtNamlengActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,56 +456,6 @@ public class Akhir extends javax.swing.JFrame {
             }
         });
     }
- private void printData(TransaksiTiket tk) {
-        DefaultTableModel tableModel = new DefaultTableModel();
-        JTable table = new JTable(tableModel);
-        tableModel.addColumn("Jenis Tiket");
-        tableModel.addColumn("Harga Tiket");
-        tableModel.addColumn("Jumlah Tiket");
-        tableModel.addColumn("Total");
-        
-//        for (int i = 0; i < matakuliahList.length; i++) {
-//        String mtk = matakuliahList[i];
-//        int sks = sksList[i];
-//        if (mtk != null) {
-//        tableModel.insertRow(tableModel.getRowCount(), new Object[]{mtk, sks, "Unggulan", i});
-//            }
-//        }
-            
-        final JPanel panel = new JPanel(new GridBagLayout());
-        final GridBagConstraints gc = new GridBagConstraints();
-        final Insets descriptionInsets = new Insets(3, 5, 3, 15);
-        final Insets valuesInsets = new Insets(3, 2, 3, 2);
-        
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.NORTH;
-        gc.insets = descriptionInsets;
-        gc.weightx = 1.0;
-        panel.add(new JLabel("NIK"), gc);
-        
-        gc.insets = valuesInsets;
-        gc.weightx = 0;
-        gc.gridx = 1;
-        panel.add(new JLabel(":"), gc);
-        gc.gridx = 2;
-        panel.add(new JLabel(String.valueOf(tk.getNIK())), gc);
-        
-        gc.insets = descriptionInsets;
-        gc.weightx = 1.0;
-        gc.gridx = 0;
-        gc.gridy = 1;
-        panel.add(new JLabel("Nama"), gc);
-        gc.insets = valuesInsets;
-        gc.weightx = 0;
-        gc.gridx = 1;
-        panel.add(new JLabel(":"), gc);
-        gc.gridx = 2;
-        panel.add(new JLabel(tk.getNama()), gc);
-        
-    
-        
-
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Bulan;
     private javax.swing.JButton Close;
@@ -435,10 +466,8 @@ public class Akhir extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Tahun;
     private javax.swing.JComboBox<String> Tanggal;
     private javax.swing.JTextField TxtHartik;
-    private javax.swing.JTextField TxtHartiktot;
     private javax.swing.JTextField TxtNamleng;
     private javax.swing.JTextField TxtNik;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -446,10 +475,12 @@ public class Akhir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbTambah;
     private javax.swing.JComboBox<String> tJenisTiket;
     // End of variables declaration//GEN-END:variables
+
+    private int String(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
