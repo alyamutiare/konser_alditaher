@@ -300,21 +300,7 @@ public class Akhir extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tJenisTiketActionPerformed
-    public String tgl(){
-        String tanggl = (String) Tanggal.getSelectedItem();
-        return tanggl;
-    }
-    
-    public String bln(){
-        String bulan = (String) Bulan.getSelectedItem();
-        return bulan;
-    }
-    
-    public String tahun (){
-        String tahn = (String) Tahun.getSelectedItem();
-        return tahn;
-    }
-    
+
     public String printInfoNama(){
         String InfoNama = TxtNamleng.getText();
         return InfoNama;
@@ -332,6 +318,10 @@ public class Akhir extends javax.swing.JFrame {
         
         out.labelNama.setText(tk.getNama());
         out.labelNIK.setText(Integer.toString(tk.getNIK()));
+        out.labelTgl.setText((String) Tanggal.getSelectedItem());
+        out.labelBulan.setText((String)Bulan.getSelectedItem());
+        out.labelTahun.setText((String)Tahun.getSelectedItem());
+        
         
         for (int i = 0; i < jenis_tiket.length; i++){
             String jnsTiket = jenis_tiket[i];
