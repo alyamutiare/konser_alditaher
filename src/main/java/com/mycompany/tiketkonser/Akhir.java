@@ -336,7 +336,7 @@ public class Akhir extends javax.swing.JFrame {
 
     private void jbTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTambahActionPerformed
          
-        // logike untuk memasukan value textfield dan combobox kedalam array yang telah dibuat
+        // logika untuk memasukan value textfield dan combobox kedalam array yang telah dibuat
         if (this.index == jenis_tiket.length -1) {
              return;
          }
@@ -346,6 +346,8 @@ public class Akhir extends javax.swing.JFrame {
          this.harga_tiket [currentIndex] = Integer.parseInt(TxtHartik.getText());
          this.jumlah_pembelian_tiket [currentIndex] =Integer.parseInt((String) JcbJumtik.getSelectedItem());
          this.total [currentIndex] = harga_tiket[currentIndex]*jumlah_pembelian_tiket[currentIndex];
+
+         JOptionPane.showMessageDialog(null, "Berhasil Menambahkan " + JcbJumtik.getSelectedItem() + " Tiket " + tJenisTiket.getSelectedItem());
         
          
          

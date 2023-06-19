@@ -66,7 +66,15 @@ public class Output extends javax.swing.JFrame {
             new String [] {
                 "Jenis Tiket", "Harga ", "Jumlah", "Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableOutput);
 
         tSubTotal.setBackground(new java.awt.Color(255, 255, 255));
